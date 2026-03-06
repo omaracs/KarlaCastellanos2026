@@ -22,7 +22,7 @@
                 },
             },
         }</script>
-<title>Fiesta Auto Insurance and Tax | Norwalk, CA</title>
+<title>Karla G. Castellanos | Auto Insurance & Taxes</title>
 <style>
     body {
       min-height: max(884px, 100dvh);
@@ -219,15 +219,15 @@ form.addEventListener('submit', async (e) => {
       body: data
     });
     if(response.ok){
-      feedback.textContent = "¡Gracias! Nos pondremos en contacto contigo pronto.";
+      feedback.textContent = "Thank you! We will contact you soon";
       feedback.classList.remove('hidden');
       form.reset();
     } else {
-      feedback.textContent = "Ocurrió un error, inténtalo de nuevo.";
+      feedback.textContent = "Oops! Something went wrong. Please try submitting the form again.";
       feedback.classList.remove('hidden');
     }
   } catch (error) {
-    feedback.textContent = "Ocurrió un error, inténtalo de nuevo.";
+    feedback.textContent = "Oops! Something went wrong. Please try submitting the form again.";
     feedback.classList.remove('hidden');
     console.error(error);
   }
