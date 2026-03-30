@@ -32,6 +32,7 @@
             },
         }
     </script>
+<title>Karla G. Castellanos | Auto Insurance & Taxes</title>
 </head>
 <body class="bg-brand-white dark:bg-brand-charcoal font-display text-brand-charcoal dark:text-brand-white">
 <!-- Top Utility Bar -->
@@ -288,26 +289,42 @@
 </div>
 </div>
 <div class="bg-brand-white rounded-2xl p-8 md:p-10 shadow-2xl border border-brand-cream">
-<form class="grid grid-cols-1 gap-6">
-<div>
-<label class="block text-brand-charcoal text-sm font-bold mb-2" style="">Full Name</label>
-<input class="w-full bg-brand-cream/30 border-brand-cream rounded-lg py-3 px-4 text-brand-charcoal focus:ring-primary focus:border-primary placeholder-brand-charcoal/30" placeholder="Enter your name" type="text">
-</div>
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-<div>
-<label class="block text-brand-charcoal text-sm font-bold mb-2" style="">Email Address</label>
-<input class="w-full bg-brand-cream/30 border-brand-cream rounded-lg py-3 px-4 text-brand-charcoal focus:ring-primary focus:border-primary placeholder-brand-charcoal/30" placeholder="name@company.com" type="email">
-</div>
-<div>
-<label class="block text-brand-charcoal text-sm font-bold mb-2" style="">Phone Number</label>
-<input class="w-full bg-brand-cream/30 border-brand-cream rounded-lg py-3 px-4 text-brand-charcoal focus:ring-primary focus:border-primary placeholder-brand-charcoal/30" placeholder="(000) 000-0000" type="tel">
-</div>
-</div>
-<div>
-<label class="block text-brand-charcoal text-sm font-bold mb-2" style="">Message</label>
-<textarea class="w-full bg-brand-cream/30 border-brand-cream rounded-lg py-3 px-4 text-brand-charcoal focus:ring-primary focus:border-primary h-32 placeholder-brand-charcoal/30" placeholder="Tell us about your needs..."></textarea>
-</div>
-<button class="bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg shadow-lg transition-all uppercase tracking-widest" type="submit" style="">Send Message</button>
+<form id="contact-form" class="grid grid-cols-1 gap-6" action="https://api.web3forms.com/submit" method="POST">
+  <input type="hidden" name="access_key" value="5758727d-5d95-4d8d-a6ca-43d3e700c0a1">
+  <input type="hidden" name="subject" value="New Quote Request - Fiesta Insurance & Tax">
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <label class="block text-brand-charcoal text-sm font-bold mb-2">First Name</label>
+      <input class="w-full bg-brand-cream/30 border-brand-cream rounded-lg py-3 px-4 text-brand-charcoal focus:ring-primary focus:border-primary placeholder-brand-charcoal/30" placeholder="Enter your first name" type="text" name="first_name" required>
+    </div>
+    <div>
+      <label class="block text-brand-charcoal text-sm font-bold mb-2">Last Name</label>
+      <input class="w-full bg-brand-cream/30 border-brand-cream rounded-lg py-3 px-4 text-brand-charcoal focus:ring-primary focus:border-primary placeholder-brand-charcoal/30" placeholder="Enter your last name" type="text" name="last_name" required>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <label class="block text-brand-charcoal text-sm font-bold mb-2">Email Address</label>
+      <input class="w-full bg-brand-cream/30 border-brand-cream rounded-lg py-3 px-4 text-brand-charcoal focus:ring-primary focus:border-primary placeholder-brand-charcoal/30" placeholder="name@company.com" type="email" name="email" required>
+    </div>
+    <div>
+      <label class="block text-brand-charcoal text-sm font-bold mb-2">Phone Number</label>
+      <input class="w-full bg-brand-cream/30 border-brand-cream rounded-lg py-3 px-4 text-brand-charcoal focus:ring-primary focus:border-primary placeholder-brand-charcoal/30" placeholder="(000) 000-0000" type="tel" name="phone">
+    </div>
+  </div>
+
+  <div>
+    <label class="block text-brand-charcoal text-sm font-bold mb-2">Message</label>
+    <textarea class="w-full bg-brand-cream/30 border-brand-cream rounded-lg py-3 px-4 text-brand-charcoal focus:ring-primary focus:border-primary h-32 placeholder-brand-charcoal/30" placeholder="Tell us about your needs..." name="message" required></textarea>
+  </div>
+
+  <!-- Honeypot spam protection -->
+  <input type="checkbox" name="botcheck" style="display: none;">
+
+<div id="form-feedback" class="hidden text-center font-medium py-3 px-4 rounded-lg bg-brand-cream/40 text-brand-charcoal"></div>
+<button class="bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg shadow-lg transition-all uppercase tracking-widest" type="submit">Send Message</button>
 </form>
 </div>
 </div>
@@ -367,4 +384,32 @@
 <p class="" style="">© 2026 Karla G. Castellanos Insurance &amp; Tax. All rights reserved. Registered insurance agent.</p>
 </div>
 </footer>
-</body></html>
+<script>
+const form = document.getElementById('contact-form');
+const feedback = document.getElementById('form-feedback');
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  feedback.classList.add('hidden');
+  const data = new FormData(form);
+  try {
+    const response = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      body: data
+    });
+    if (response.ok) {
+      feedback.textContent = "Thank you! We will contact you soon.";
+      feedback.classList.remove('hidden');
+      form.reset();
+    } else {
+      feedback.textContent = "Oops! Something went wrong. Please try submitting the form again.";
+      feedback.classList.remove('hidden');
+    }
+  } catch (error) {
+    feedback.textContent = "Oops! Something went wrong. Please try submitting the form again.";
+    feedback.classList.remove('hidden');
+    console.error(error);
+  }
+});
+</script>
+</body>
+</html>
